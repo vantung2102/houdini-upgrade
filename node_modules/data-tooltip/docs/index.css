@@ -1,0 +1,66 @@
+@import 'normalize.css';
+@import '../index.css';
+
+* {
+  box-sizing: border-box;
+  font-family: 'Open sans', sans-serif;
+}
+
+[class*=tooltip--]:before, 
+[class*=tooltip--]:after {
+  z-index: 1;
+}
+
+.container {
+  width: 700px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
+}
+
+.sections:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+li {
+  line-height: 1.4;
+}
+
+ul {
+  margin-bottom: 10px;
+}
+
+section,
+.p,
+section div {
+  padding: 10px
+}
+
+section {
+  width: 33.333333333%;
+  float: left;
+  white-space: pre;
+}
+
+section:nth-of-type(13),
+section:nth-of-type(14) {
+  width: 50%;
+}
+
+section:nth-of-type(15) {
+  width: 100%;
+}
+
+section div {
+  background: rgba(23, 112, 123, 0.23);
+  border-radius: 3px;
+  width: 100%;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+

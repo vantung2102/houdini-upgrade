@@ -1,0 +1,24 @@
+/* License: AGPL-3.0-or-later WITH Web-Template-Output-Additional-Permission-3.0-or-later */
+@import 'mixins';
+@import 'recurring_donations/modal';
+@import 'recurring_donations/edit';
+@import 'pikaday';
+@import 'supporters/form';
+@import 'bootstrap-tour';
+@import 'components/page_tabs';
+@import 'components/pagination';
+@import 'components/panels_layout';
+
+.sidePanel,
+.panelsLayout.is-showingSidePanel .mainPanel {
+	width: 50%;
+}
+.panelsLayout.is-showingSidePanel .button--closeSidePanel {
+	right: 50%;
+}
+.panelsLayout.is-showingSidePanel .hiddenWhenExpanded {
+	display: none;
+}
+.sidePanel table td:first-of-type {
+	font-weight: bold;
+}

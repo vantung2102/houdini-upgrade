@@ -1,0 +1,66 @@
+<%- # License: AGPL-3.0-or-later WITH Web-Template-Output-Additional-Permission-3.0-or-later -%>
+<% content_for(:dont_load_optimizely) {'true'} %>
+<% content_for(:footer_hidden) {'hidden'} %>
+
+<% content_for :stylesheets do %>
+			<%= stylesheet_link_tag 'nonprofits/payments/index/page' %>
+      <%= IncludeAsset.css '/client/css/bootstrap.css' %>
+<% end %>
+
+<% content_for :javascripts do %>
+
+	<script>
+		appl.def('has_bank', <%= !!@nonprofit.bank_account %>)
+	</script>
+	<%= IncludeAsset.js '/client/js/nonprofits/payments/index/page.js' %>
+  <%= IncludeAsset.js '/app/react.js' %>
+  <%= IncludeAsset.js '/app/react-dom.js' %>
+  <%= IncludeAsset.js '/app/vendor.js' %>
+  <%= IncludeAsset.js '/app/edit_payment_panex.js' %>
+
+  <script>
+    appl.def('open_donation_modal', function(payment_details) {
+
+      function SetupLoadReactEditPaymentPane(modalActive){
+        LoadReactEditPaymentPane(document.getElementById('EditPaymentPaneElement'),
+          payment_details.data,
+          appl.campaigns.data,
+          appl.events.data,
+          () => {SetupLoadReactEditPaymentPane(false)},
+          modalActive,
+          appl.start_loading,
+          appl.update_donation__success,
+          ENV.nonprofitTimezone)
+      }
+
+      SetupLoadReactEditPaymentPane(true)
+
+
+      return appl
+    })
+
+  </script>
+<% end %>
+
+<%= render '/components/trial_bar' if QueryBillingSubscriptions.currently_in_trial?(@nonprofit.id) %>
+
+<%= render 'nonprofits/transaction_title',
+	active: :payments,
+	icon_class: 'icon-piggy-bank',
+	page_name: 'History' %>
+
+<%= render 'table_meta' %>
+
+<main class='panelsLayout container--wide'>
+	<section class='panelsLayout-body'>
+		<%= render 'filter_panel' %>
+		<%= render 'main_panel' %>
+		<%= render 'side_panel' %>
+		<%= render 'components/side_panel_close' %>
+		<%= render 'components/tables/filtering/filter_panel_close' %>
+	</section>
+</main>
+
+<%= render 'export_payments_s3_modal' %>
+<%= render 'refunds/new_modal' %>
+<%= render 'donations/edit_modal' %>

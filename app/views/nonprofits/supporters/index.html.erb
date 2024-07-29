@@ -1,0 +1,93 @@
+<%- # License: AGPL-3.0-or-later WITH Web-Template-Output-Additional-Permission-3.0-or-later -%>
+<% content_for(:dont_load_optimizely) {'true'} %>
+<% content_for(:footer_hidden) {'hidden'} %>
+
+<% content_for(:stylesheets) do %>
+  <%= stylesheet_link_tag 'nonprofits/supporters/index/page' %>
+  <%= IncludeAsset.css '/client/css/bootstrap.css' %>
+<% end %>
+<%= content_for :javascripts do %>
+	<%= IncludeAsset.js '/client/js/nonprofits/supporters/index/page.js' %>
+	<%= render 'common/froala' %>
+	<%= IncludeAsset.js '/app/react.js' %>
+  <%= IncludeAsset.js '/app/react-dom.js' %>
+  <%= IncludeAsset.js '/app/vendor.js' %>
+  <%= IncludeAsset.js '/app/create_new_offsite_payment_panex.js' %>
+
+  <script>
+    appl.def('open_donation_modal', function(supporter_id, donation_finish_successful_state_fn) {
+      $('.modal').removeClass('inView')
+
+      function SetupLoadCreateOffsiteDonationPane(modalActive){
+        LoadReactCreateOffsiteDonationPane(document.getElementById('react-vdom-hack'),
+          appl.campaigns.data,
+          appl.events.data,
+          app.nonprofit_id,
+          supporter_id,
+          () => {}, //appl.start_loading,
+          donation_finish_successful_state_fn, //appl.update_donation__success,
+          () => {SetupLoadCreateOffsiteDonationPane(false)},
+          modalActive,
+          ENV.nonprofitTimezone)
+      }
+
+      SetupLoadCreateOffsiteDonationPane(true)
+
+
+      return appl
+    })
+
+  </script>
+<% end %>
+
+<%= render '/components/trial_bar' if nonprofit_in_trial?(@nonprofit.id) %>
+
+<%= render 'header'%>
+<%= render 'table_meta' %>
+
+<div class='panelsLayout container--wide top--highest supporters'>
+	<section class='panelsLayout-body'>
+		<%= render 'filter_panel' %>
+		<%= render 'side_panel' %>
+		<%= render 'main_panel' %>
+		<%= render 'components/side_panel_close' %>
+		<%= render 'components/tables/filtering/filter_panel_close' %>
+	</section>
+</div>
+
+<div id='js-main'></div>
+
+<%= render 'merge_modal' %>
+<%= render 'new_modal' %>
+<%= render 'edit_modal' %>
+
+<%= render 'settings_modal' %>
+
+<%= render 'bulk_delete_modal' %>
+
+<%= render 'tag_edit_modal' %>
+<%= render 'bulk_tag_edit_modal' %>
+<%= render 'manage_tag_master_modal' %>
+
+<%= render 'note_modal' %>
+
+<%= render 'manage_field_master_modal' %>
+
+<%= render 'export_supporters_s3_modal' %>
+
+<%= render 'edit_custom_fields_modal' %>
+<%= render 'edit_bulk_custom_fields_modal' %>
+
+<%= render 'map_modal' %>
+<%# render 'email_modal' %>
+<%# render 'email_preview_modal' %>
+<%# render 'email_read_only_modal' %>
+
+<%= render 'manage_email_drafts_modal' %>
+<%= render 'create_or_update_email_draft_modal' %>
+
+<%= render 'donations/new_offline_modal' %>
+
+<div id='js-vdomParty'></div>
+
+<div id="react-vdom-hack"></div>

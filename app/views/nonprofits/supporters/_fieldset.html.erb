@@ -1,0 +1,17 @@
+<%- # License: AGPL-3.0-or-later WITH Web-Template-Output-Additional-Permission-3.0-or-later -%>
+<!-- partial start: supporters/fieldset -->
+<% type ||= 'text' %>
+<% cssClass ||= '' %>
+<% required ||= false %>
+<% placeholder += (required ? ' (required)' : '') %>
+
+<fieldset  class='<%= cssClass %>'>
+	<input class='u-marginBottom--0'
+  type='<%= type %>'
+  title="<%= placeholder %>"
+  name="<%= name %>"
+  <%= required && "required" %>
+  placeholder="<%= placeholder%>"
+  value="<%= profile && profile[name]%>">
+</fieldset>
+<!-- partial end: supporters/fieldset -->

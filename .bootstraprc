@@ -1,0 +1,17 @@
+{
+  "bootstrapVersion": 3,
+  "styleLoaders": ["style", "css", "sass"],
+  "extractStyles": true,
+  "styles": {
+    "mixins": true,
+    "grid": true,
+    "forms": true,
+    "input-groups": true,
+    "responsive-utilities":true,
+    "panels": true,
+    "type": true
+  },
+
+  "scripts": false,
+  "styleNamespace": ".tw-bs"
+}

@@ -1,0 +1,9 @@
+*
+!Gemfile
+!Gemfile.lock
+!package.json
+!package-lock.json
+!script/build/debian/*.sh
+!Rakefile
+!config/*
+!gems/*

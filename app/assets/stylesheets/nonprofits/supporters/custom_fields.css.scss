@@ -1,0 +1,23 @@
+/* License: AGPL-3.0-or-later WITH Web-Template-Output-Additional-Permission-3.0-or-later */
+@import 'mixins';
+
+button[toggle='remove'] {
+	@include transform(translateY(3px));
+  margin-right: 5px;
+}
+
+.customField-remove {
+	position: absolute;
+	bottom: 4px;
+	font-size: 14px;
+	@include ellipsis;
+	max-width: 95%;
+}
+
+.layout--two--repeat > *:nth-of-type(2n -1) .customField-remove {
+	left: 12px;
+}
+
+.layout--two--repeat > *:nth-of-type(2n) .customField-remove {
+	left: 7px;
+}

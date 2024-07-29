@@ -1,0 +1,29 @@
+<%- # License: AGPL-3.0-or-later WITH Web-Template-Output-Additional-Permission-3.0-or-later -%>
+<!-- partial start: components/_footer_sub -->
+<section class='globalFooter-sub'>
+	<div class='container'>
+
+		<span <%= !current_user ? "style='display: block;'" : ""%>>
+			<span class='globalFooter-sub-items'>
+
+				<span>
+
+					<span class='globalFooter-sub-item'>&copy; <%= Time.current.year %> <%= Settings.general.name %></span>
+
+					<span class='globalFooter-sub-item'>
+						<% if current_user %>
+							<% if Settings.terms_and_privacy&.help_url %><span><%= link_to("Help", Settings.terms_and_privacy.help_url) %></span><% end %>
+						<% else %>
+							<% if Settings.terms_and_privacy&.about_url %><span><%= link_to("About", Settings.terms_and_privacy.about_url) %></span><% end %>
+						<% end %>
+					</span>
+					<span class='globalFooter-sub-item'>
+						<%= link_to( t("footer.terms_and_privacy"), :static_terms_and_privacy) %>
+					</span>
+				</span>
+			</span>
+		</span>
+
+	</div>
+</section>
+<!-- partial start: components/_footer_sub -->

@@ -1,0 +1,62 @@
+<head>
+  <meta charset="utf-8">
+  <title>CC tooltip</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="build.css">
+</head>
+
+<body>
+  <div class='container'>
+    <div class='p'>
+      <h2>tooltip demo</h2>
+      <ul>
+        <li>hover over the elements below to see the tooltip variations</li>
+        <li>the text in each element is the class name given to that element</li>
+        <li>the tooltip text comes from the data-tooltip attribute</li>
+        <li><a href='https://github.com/commitchange/tooltip'>more docs</a></li>
+      </ul>
+    </div>
+    <div class='sections'></div>
+  <div>
+</body>
+
+<script>
+  var data = [
+    {classes: 'bottomLeft'}
+  , {classes: 'bottom'}
+  , {classes: 'bottomRight'}
+  , {classes: 'right'}
+  , {}
+  , {classes: 'left'}
+  , {classes: 'topLeft'}
+  , {classes: 'top'}
+  , {classes: 'topRight'}
+  , {classes: ['topLeft', 'small'], width: '100px'}
+  , {classes: ['top', 'medium'], width: '150px'}
+  , {classes: ['topRight', 'large'], width: '300px'}
+  , {classes: ['topLeft', 'full'], width: '100%'}
+  , {classes: ['topRight', 'full'], width: '100%'}
+  , {classes: ['bottom', 'show']}
+  ]
+
+  var sections = document.querySelector('.sections')
+
+  data.map(function(x) {
+    var section = document.createElement('section')
+    var div = document.createElement('div')
+    var classes = [].concat(x.classes).map(function(c) { 
+      if (c) { return 'tooltip--' + c }
+      return 'opacity-0'
+    })
+    classes.map(function(c) { c && div.classList.add(c) })
+    function attrText() {
+      if(x.width) { return 'Adding the ' + classes[1] + ' class will set the tooltip width to ' + x.width}
+      return classes.join(' ')
+    }
+    if(x.classes) { div.setAttribute('data-tooltip', attrText()) }
+    div.innerHTML = classes.join('\n')
+    section.appendChild(div)
+    sections.appendChild(section)
+  })
+</script>
+
