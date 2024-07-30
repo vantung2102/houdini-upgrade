@@ -16,8 +16,10 @@ client/js/nonprofits/donate/plugins-enabled
 /db/*.sqlite3
 
 # Ignore all logfiles and tempfiles.
-log/
-tmp/
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep/
 
 # Zeus
 zeus.json
